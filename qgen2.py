@@ -5,24 +5,28 @@ import random
 
 
 class QGen:
-    characters = (
-        string.ascii_lowercase,
-        string.ascii_uppercase,
-        string.digits,
-        string.punctuation
-    )
 
-    simple_punctuation = """!#$%&'()*+,-./:;<=>?@[\\]_}{~"""
+    def __init__(self) -> None:
+        self.characters = (
+            string.ascii_lowercase,
+            string.ascii_uppercase,
+            string.digits,
+            string.punctuation
+        )
 
-    lowercase_vowels = list("aoiue")
-    lowercase_consonants = list("bcdfghjklmnpqrstvwxzy")
+        self.simple_punctuation = """!#$%&'()*+,-./:;<=>?@[\\]_}{~"""
 
-    cluster_brake_prob = (
-        [0, 0, 0, 0, 12, 25, 48, 65, 100],
-        [0, 0, 0, 12, 25, 48, 65, 100],
-        [0, 0, 25, 67, 100],
-        [0, 25, 67, 100]
-    )
+        self.lowercase_vowels = list("aoiue")
+        self.lowercase_consonants = list("bcdfghjklmnpqrstvwxzy")
+
+        self.cluster_brake_prob = (
+            [0, 0, 0, 0, 12, 25, 48, 65, 100],
+            [0, 0, 0, 12, 25, 48, 65, 100],
+            [0, 0, 25, 67, 100],
+            [0, 25, 67, 100]
+        )
+
+        self.profanity_checker = word_check.ProfanityCheck()
 
     def weighted_random(self, length: int = 8, flags: list = [100, 0, 60, 0]) -> str:
 
@@ -122,7 +126,7 @@ class QGen:
                         next_vowel_chance = 100
                     is_previous_vowel = False
 
-            is_profanity_found = word_check.find_occurrence(generated_string, word_check.load_words_from_file("QuackGen\\bad-words-mini.txt"))
+            is_profanity_found = self.profanity_checker.find_occurrence(generated_string)
 
         if is_upper:
             return generated_string.upper()
