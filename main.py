@@ -34,6 +34,7 @@ class MyRoot(BoxLayout):
         self.generate_random()
 
     def pressed_readable(self):
+        self.slider_length.range = (8, 20)
         self.is_random = False
         self.btn_mode_random.disabled = False
         self.btn_mode_random.background_color = [1, 1, 1, 1]
