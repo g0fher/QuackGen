@@ -6,10 +6,12 @@
     slider_flags_uppercase: slider_flags_uppercase
     slider_flags_numbers: slider_flags_numbers
     slider_flags_punctuation: slider_flags_punctuation
+    btn_mode_random: btn_mode_random
+    btn_mode_readable: btn_mode_readable
 
     
     BoxLayout:
-        padding: [50, 30, 50, 30]
+        padding: [50, 100, 50, 100]
         spacing: 20
         orientation: "vertical"
 
@@ -18,7 +20,7 @@
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             size_hint: 1, 0.2
             text: "QuackGen"
-            font_size: 64
+            font_size: sp(52)
             color: 0.54, 0.93, 0.25, 1
 
         # Header
@@ -30,16 +32,20 @@
                 size_hint: 0.5, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
+                    # background_color: [0.345, 0.345, 0.345, 1]
+                    id: btn_mode_random
                     text: "Random"
-                    font_size: 28
+                    font_size: sp(28)
                     on_press: root.pressed_random()
             
             BoxLayout:
                 size_hint: 0.5, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
+                    id: btn_mode_readable
+                    # background_color: [0.345, 0.345, 0.345, 1]
                     text: "Readable"
-                    font_size: 28
+                    font_size: sp(28)
                     on_press: root.pressed_readable()
         
         # Output
@@ -48,7 +54,7 @@
             size_hint: 1, 0.2
             id: label_random_string
             text: "-"
-            font_size: 48
+            font_size: sp(32)
         
         # Action buttons
         BoxLayout:
@@ -60,24 +66,30 @@
                 size_hint: 0.25, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
+                    # id: btn_reset
+                    # disabled: True
                     text: "Reset"
-                    font_size: 28
+                    font_size: sp(28)
                     on_press: root.reset()
             
             BoxLayout:
                 size_hint: 0.5, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
+                    # id: btn_generate
+                    # disabled: True
                     text: "Generate"
-                    font_size: 28
+                    font_size: sp(28)
                     on_press: root.generate_random()
 
             BoxLayout:
                 size_hint: 0.25, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
+                    # id: btn_copy
+                    # disabled: True
                     text: "Copy"
-                    font_size: 28
+                    font_size: sp(28)
                     on_press: root.copy_to_clipboard()
         
         # Settings sliders
@@ -94,11 +106,11 @@
                 Label:
                     size_hint: 0.7, 1
                     text: "Length"
-                    font_size: 18
+                    font_size: sp(18)
                 Label:
                     size_hint: 0.2, 1
                     text: str(int(slider_length.value))
-                    font_size: 18
+                    font_size: sp(18)
                 Slider:
                     value: root.length
                     id: slider_length
@@ -121,11 +133,11 @@
                         disabled: not(bool(slider_flags_lowercase.value))
                         size_hint: 0.7, 1
                         text: "Lowercase weight"
-                        font_size: 18
+                        font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
                         text: str(int(slider_flags_lowercase.value))
-                        font_size: 18
+                        font_size: sp(18)
                     Slider:
                         id: slider_flags_lowercase
                         value: root.flags[0]
@@ -142,11 +154,11 @@
                         disabled: not(bool(slider_flags_uppercase.value))
                         size_hint: 0.7, 1
                         text: "Uppercase weight"
-                        font_size: 18
+                        font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
                         text: str(int(slider_flags_uppercase.value))
-                        font_size: 18
+                        font_size: sp(18)
                     Slider:
                         id: slider_flags_uppercase
                         value: root.flags[1]
@@ -163,11 +175,11 @@
                         disabled: not(bool(slider_flags_numbers.value))
                         size_hint: 0.7, 1
                         text: "Numbers weight"
-                        font_size: 18
+                        font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
                         text: str(int(slider_flags_numbers.value))
-                        font_size: 18
+                        font_size: sp(18)
                     Slider:
                         id: slider_flags_numbers
                         value: root.flags[2]
@@ -183,12 +195,12 @@
                     Label:
                         disabled: not(bool(slider_flags_punctuation.value))
                         size_hint: 0.7, 1
-                        font_size: 18
+                        font_size: sp(18)
                         text: "Punctuation weight"
                     Label:
                         size_hint: 0.2, 1
                         text: str(int(slider_flags_punctuation.value))
-                        font_size: 18
+                        font_size: sp(18)
                     Slider:
                         id: slider_flags_punctuation
                         value: root.flags[3]

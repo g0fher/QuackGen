@@ -13,31 +13,46 @@ class MyRoot(BoxLayout):
 
     length = 8
     flags = [100, 0, 50, 0]
-    is_random = True
+    is_random = None
+
+    is_mode_selected = False
     
 
     def __init__(self):
         super(MyRoot, self).__init__()
         self.qgen_instance = qgen2.QGen()
-        self.generate_random()
+        self.label_random_string.text = "Select generation mode above"
 
     def pressed_random(self):
         self.is_random = True
+        self.btn_mode_random.disabled = True
+        self.btn_mode_random.background_color = [0, 0, 1, 1]
+        self.btn_mode_readable.background_color = [1, 1, 1, 1]
+        self.btn_mode_readable.disabled = False
+
         self.reset()
         self.generate_random()
 
     def pressed_readable(self):
         self.is_random = False
+        self.btn_mode_random.disabled = False
+        self.btn_mode_random.background_color = [1, 1, 1, 1]
+        self.btn_mode_readable.background_color = [0, 0, 1, 1]
+        self.btn_mode_readable.disabled = True
+
         self.reset()
         self.generate_random()
 
     def generate_random(self):
-        # self.label_random_string.text = self.qgen_instance.random_string_digits(self.length)
-        if self.is_random:
-            self.label_random_string.text = self.qgen_instance.weighted_random(self.length, self.flags)
+        if not self.is_mode_selected:
+            self.is_mode_selected = True
+            self.pressed_random()
         else:
-            self.label_random_string.text = self.qgen_instance.cluster_gen(self.length, self.flags)
-    
+            if self.is_random:
+                self.label_random_string.text = self.qgen_instance.weighted_random(self.length, self.flags)
+            else:
+                self.label_random_string.text = self.qgen_instance.cluster_gen(self.length, self.flags)
+
     def slider_update_length(self, *args):
         self.length = int(args[1])
         self.generate_random()
