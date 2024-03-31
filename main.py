@@ -21,7 +21,7 @@ class MyRoot(BoxLayout):
     def __init__(self):
         super(MyRoot, self).__init__()
         self.qgen_instance = qgen2.QGen()
-        self.label_random_string.text = "Select generation mode above"
+        self.label_random_string.text = "Select generation\nmode above"
 
     def pressed_random(self):
         self.is_random = True
@@ -43,10 +43,12 @@ class MyRoot(BoxLayout):
         self.reset()
         self.generate_random()
 
+
     def generate_random(self):
         if not self.is_mode_selected:
             self.is_mode_selected = True
-            self.pressed_random()
+            self.label_random_string.text = "click Generate"
+            self.btn_generate.disabled = False
         else:
             if self.is_random:
                 self.label_random_string.text = self.qgen_instance.weighted_random(self.length, self.flags)
@@ -54,12 +56,14 @@ class MyRoot(BoxLayout):
                 self.label_random_string.text = self.qgen_instance.cluster_gen(self.length, self.flags)
 
     def slider_update_length(self, *args):
-        self.length = int(args[1])
-        self.generate_random()
+        if self.is_mode_selected:
+            self.length = int(args[1])
+            self.generate_random()
 
     def slider_update_flags(self, flag_id, *args):
-        self.flags[flag_id] = int(args[1])
-        self.generate_random()
+        if self.is_mode_selected:
+            self.flags[flag_id] = int(args[1])
+            self.generate_random()
 
     def reset(self):
         self.length = 8
@@ -71,7 +75,8 @@ class MyRoot(BoxLayout):
         self.slider_flags_punctuation.value = self.flags[3]
 
     def copy_to_clipboard(self):
-        Clipboard.copy(self.label_random_string.text)
+        if self.is_mode_selected:
+            Clipboard.copy(self.label_random_string.text)
 
 
 

@@ -210,7 +210,11 @@ class QGen:
 
         generated_string = ""
 
+        separator = "_"
+
         for cluster in archived_clusters:
+            generated_string += "".join(separator)
+
             if cluster[0] == 0:
                 generated_string += "".join(self.readable_letters(cluster[1], is_upper=False))
                 continue
@@ -223,10 +227,13 @@ class QGen:
             if cluster[0] == 3:
                 generated_string += "".join(self.random_string_digits(cluster[1], is_punct=True))
                 continue
+            else:
+                generated_string += "".join(".null.")
+                continue
         
         return generated_string
 
 
 if __name__ == '__main__':
     test = QGen()
-    test.cluster_gen(20)
+    print(test.cluster_gen(20))

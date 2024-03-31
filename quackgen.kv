@@ -8,6 +8,8 @@
     slider_flags_punctuation: slider_flags_punctuation
     btn_mode_random: btn_mode_random
     btn_mode_readable: btn_mode_readable
+    btn_generate: btn_generate
+
 
     
     BoxLayout:
@@ -21,7 +23,7 @@
             size_hint: 1, 0.2
             text: "QuackGen"
             font_size: sp(52)
-            color: 0.54, 0.93, 0.25, 1
+            color: 0.32, 0.86, 0.20, 1
 
         # Header
         BoxLayout:
@@ -76,8 +78,9 @@
                 size_hint: 0.5, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 Button:
-                    # id: btn_generate
-                    # disabled: True
+                    id: btn_generate
+                    disabled: True
+                    background_color: [0, 0.6, 0, 1]
                     text: "Generate"
                     font_size: sp(28)
                     on_press: root.generate_random()
@@ -104,7 +107,7 @@
                 size_hint: 1, 0.3
                 orientation: 'horizontal'
                 Label:
-                    size_hint: 0.7, 1
+                    size_hint: 0.5, 1
                     text: "Length"
                     font_size: sp(18)
                 Label:
@@ -124,6 +127,11 @@
                 orientation: "vertical"
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
                 spacing: 20
+
+                Label:
+                    size_hint: 1, 0.2
+                    text: "Weight of symbol groups"
+                    font_size: sp(18)
                 
                 # lowercase
                 BoxLayout:
@@ -131,8 +139,8 @@
                     orientation: 'horizontal'
                     Label:
                         disabled: not(bool(slider_flags_lowercase.value))
-                        size_hint: 0.7, 1
-                        text: "Lowercase weight"
+                        size_hint: 0.5, 1
+                        text: "Lowercase"
                         font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
@@ -152,8 +160,8 @@
                     orientation: 'horizontal'
                     Label:
                         disabled: not(bool(slider_flags_uppercase.value))
-                        size_hint: 0.7, 1
-                        text: "Uppercase weight"
+                        size_hint: 0.5, 1
+                        text: "Uppercase"
                         font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
@@ -173,8 +181,8 @@
                     orientation: 'horizontal'
                     Label:
                         disabled: not(bool(slider_flags_numbers.value))
-                        size_hint: 0.7, 1
-                        text: "Numbers weight"
+                        size_hint: 0.5, 1
+                        text: "Numbers"
                         font_size: sp(18)
                     Label:
                         size_hint: 0.2, 1
@@ -194,9 +202,9 @@
                     orientation: 'horizontal'
                     Label:
                         disabled: not(bool(slider_flags_punctuation.value))
-                        size_hint: 0.7, 1
+                        size_hint: 0.5, 1
                         font_size: sp(18)
-                        text: "Punctuation weight"
+                        text: "Punctuation"
                     Label:
                         size_hint: 0.2, 1
                         text: str(int(slider_flags_punctuation.value))
