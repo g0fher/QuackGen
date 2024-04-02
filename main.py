@@ -26,9 +26,11 @@ class MyRoot(BoxLayout):
         self.label_random_string.text = "Select generation\nmode above"
 
     def pressed_random(self):
+        self.lbl_cluster_sep.disabled = True
+        self.chb_cluster_sep.disabled = True
         self.is_random = True
         self.btn_mode_random.disabled = True
-        self.btn_mode_random.background_color = [0.5, 0.5, 1, 1]
+        self.btn_mode_random.background_color = "#33b5e5"
         self.btn_mode_readable.background_color = [1, 1, 1, 1]
         self.btn_mode_readable.disabled = False
 
@@ -36,10 +38,12 @@ class MyRoot(BoxLayout):
         self.generate_random()
 
     def pressed_readable(self):
+        self.lbl_cluster_sep.disabled = False
+        self.chb_cluster_sep.disabled = False
         self.is_random = False
         self.btn_mode_random.disabled = False
         self.btn_mode_random.background_color = [1, 1, 1, 1]
-        self.btn_mode_readable.background_color = [0.5, 0.5, 1, 1]
+        self.btn_mode_readable.background_color = "#33b5e5"
         self.btn_mode_readable.disabled = True
 
         self.reset()
@@ -91,12 +95,6 @@ class MyRoot(BoxLayout):
             self.is_cluster_separation = True
         else:
             self.is_cluster_separation = False
-
-    
-    
-            
-
-
 
 
 class QuackGen(App):

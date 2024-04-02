@@ -9,7 +9,8 @@
     btn_mode_random: btn_mode_random
     btn_mode_readable: btn_mode_readable
     btn_generate: btn_generate
-
+    lbl_cluster_sep: lbl_cluster_sep
+    chb_cluster_sep: chb_cluster_sep
 
     
     BoxLayout:
@@ -23,7 +24,7 @@
             size_hint: 1, 0.2
             text: "QuackGen"
             font_size: sp(48)
-            color: 0.25, 0.685, 0.25, 1
+            color: 0.25, 0.85, 0.25, 1
 
         # Header
         BoxLayout:
@@ -252,9 +253,12 @@
                         orientation: 'horizontal'
 
                         Label:
+                            id: lbl_cluster_sep
+                            disabled: False
                             font_size: sp(18)
                             text: "Cluster separation"
                         
                         CheckBox:
+                            id: chb_cluster_sep
                             size_hint: 0.5, 1
                             on_active: root.chbx_cluster_sep(self.active)
