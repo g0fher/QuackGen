@@ -142,7 +142,11 @@ class QGen:
                 generated_string += "".join(secrets.choice(self.simple_punctuation))
         return generated_string
     
-    def cluster_gen(self, length: int = 8, flags: list = [100, 0, 60, 0]):
+    def cluster_gen(self, 
+                    length: int = 8, 
+                    flags: list = [100, 0, 60, 0],
+                    cluster_separation = False,
+                    merge_clusters = False) -> str:
         
         # list of pairs: cluster index and cluster length
         active_clusters_holder = []
@@ -213,7 +217,9 @@ class QGen:
         separator = "_"
 
         for cluster in archived_clusters:
-            generated_string += "".join(separator)
+
+            if cluster_separation:
+                generated_string += "".join(separator)
 
             if cluster[0] == 0:
                 generated_string += "".join(self.readable_letters(cluster[1], is_upper=False))

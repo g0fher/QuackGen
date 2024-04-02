@@ -16,6 +16,8 @@ class MyRoot(BoxLayout):
     is_random = None
 
     is_mode_selected = False
+
+    is_cluster_separation = False
     
 
     def __init__(self):
@@ -26,7 +28,7 @@ class MyRoot(BoxLayout):
     def pressed_random(self):
         self.is_random = True
         self.btn_mode_random.disabled = True
-        self.btn_mode_random.background_color = [0, 0, 1, 1]
+        self.btn_mode_random.background_color = [0.5, 0.5, 1, 1]
         self.btn_mode_readable.background_color = [1, 1, 1, 1]
         self.btn_mode_readable.disabled = False
 
@@ -34,11 +36,10 @@ class MyRoot(BoxLayout):
         self.generate_random()
 
     def pressed_readable(self):
-        self.slider_length.range = (8, 20)
         self.is_random = False
         self.btn_mode_random.disabled = False
         self.btn_mode_random.background_color = [1, 1, 1, 1]
-        self.btn_mode_readable.background_color = [0, 0, 1, 1]
+        self.btn_mode_readable.background_color = [0.5, 0.5, 1, 1]
         self.btn_mode_readable.disabled = True
 
         self.reset()
@@ -54,7 +55,7 @@ class MyRoot(BoxLayout):
             if self.is_random:
                 self.label_random_string.text = self.qgen_instance.weighted_random(self.length, self.flags)
             else:
-                self.label_random_string.text = self.qgen_instance.cluster_gen(self.length, self.flags)
+                self.label_random_string.text = self.qgen_instance.cluster_gen(self.length, self.flags, self.is_cluster_separation)
 
     def slider_update_length(self, *args):
         if self.is_mode_selected:
@@ -78,6 +79,22 @@ class MyRoot(BoxLayout):
     def copy_to_clipboard(self):
         if self.is_mode_selected:
             Clipboard.copy(self.label_random_string.text)
+    
+    def chbx_length_incr(self, is_active):
+        if is_active:
+            self.slider_length.range = (6, 48)
+        else:
+            self.slider_length.range = (6, 20)
+
+    def chbx_cluster_sep(self, is_active):
+        if is_active:
+            self.is_cluster_separation = True
+        else:
+            self.is_cluster_separation = False
+
+    
+    
+            
 
 
 

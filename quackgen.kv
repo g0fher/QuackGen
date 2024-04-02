@@ -22,8 +22,8 @@
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             size_hint: 1, 0.2
             text: "QuackGen"
-            font_size: sp(52)
-            color: 0.32, 0.86, 0.20, 1
+            font_size: sp(48)
+            color: 0.25, 0.685, 0.25, 1
 
         # Header
         BoxLayout:
@@ -80,7 +80,7 @@
                 Button:
                     id: btn_generate
                     disabled: True
-                    background_color: [0, 0.6, 0, 1]
+                    background_color: 0.25, 0.685, 0.25, 1
                     text: "Generate"
                     font_size: sp(28)
                     on_press: root.generate_random()
@@ -97,6 +97,7 @@
         
         # Settings sliders
         BoxLayout:
+            size_hint: 1, 1.5
             pos_hint: {"center_x": 0.5, "center_y": 0.5}
             spacing: 50
             orientation: "vertical"
@@ -104,7 +105,7 @@
             # Length
             BoxLayout:
                 spacing: 10
-                size_hint: 1, 0.3
+                size_hint: 1, 0.2
                 orientation: 'horizontal'
                 Label:
                     size_hint: 0.5, 1
@@ -117,7 +118,7 @@
                 Slider:
                     value: root.length
                     id: slider_length
-                    range: (5, 20)
+                    range: (6, 20)
                     step: 1
                     orientation: 'horizontal'
                     on_value: root.slider_update_length(*args)
@@ -129,7 +130,7 @@
                 spacing: 20
 
                 Label:
-                    size_hint: 1, 0.2
+                    size_hint: 1, 0.5
                     text: "Weight of symbol groups"
                     font_size: sp(18)
                 
@@ -216,4 +217,44 @@
                         step: 1
                         orientation: 'horizontal'
                         on_value: root.slider_update_flags(3, *args)
-        
+            
+            # advanced settings
+            BoxLayout:
+                size_hint: 1, 0.2
+                orientation: "vertical"
+                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                spacing: 20
+
+                Label:
+                    size_hint: 1, 0.2
+                    text: "Advanced settings"
+                    font_size: sp(18)
+                
+                BoxLayout:
+                    spacing: 30
+                    orientation: 'horizontal'
+
+                    
+                    BoxLayout:
+                        spacing: 10
+                        orientation: 'horizontal'
+
+                        Label:
+                            font_size: sp(18)
+                            text: "Length increase"
+                        
+                        CheckBox:
+                            size_hint: 0.5, 1
+                            on_active: root.chbx_length_incr(self.active)
+                        
+                    BoxLayout:
+                        spacing: 10
+                        orientation: 'horizontal'
+
+                        Label:
+                            font_size: sp(18)
+                            text: "Cluster separation"
+                        
+                        CheckBox:
+                            size_hint: 0.5, 1
+                            on_active: root.chbx_cluster_sep(self.active)
